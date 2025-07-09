@@ -55,7 +55,7 @@ export default function Home() {
     <>
       <Navbar selectedItem="Home" />
       <HeroSection category="Home" />
-      <InfoContainer />
+      {/* <InfoContainer /> */}
       <ProductSlider
         title="Most Popular"
         subTitle="Discover flavours in demand"
@@ -69,7 +69,7 @@ export default function Home() {
         subTitle="From our Farm"
         productList={productlist}
       />
-      <Testimonals />
+      {/* <Testimonals /> */}
       <ProductSlider
         title="Daily Best Sells"
         subTitle="Pure. Natural. Safe. Hygiene You Can Trust."

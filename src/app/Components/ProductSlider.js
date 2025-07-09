@@ -9,15 +9,15 @@ function ProductSlider({title, subTitle, productList, textAlignCenter}) {
     arrows: true,
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
      responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
           infinite: true,
           dots: false
         }
@@ -27,14 +27,18 @@ function ProductSlider({title, subTitle, productList, textAlignCenter}) {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          initialSlide: 2
+          initialSlide: 2,
+            dots: false,
+             arrows: false,
         }
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+            dots: false,
+             arrows: false,
         }
       }
     ]

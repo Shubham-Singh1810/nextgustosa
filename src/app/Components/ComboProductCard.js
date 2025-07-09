@@ -121,6 +121,7 @@ function ComboProductCard({ value, showEdge }) {
               ? "https://cdn-icons-png.flaticon.com/128/2077/2077502.png"
               : "https://cdn-icons-png.flaticon.com/128/1077/1077035.png"
           }
+          style={{width:"20px" , height:"20px"}}
         />
       </div>
 
@@ -158,7 +159,7 @@ function ComboProductCard({ value, showEdge }) {
         {comboCartList?.find((item) => item._id === value._id) ? (
               <div className="d-flex counterDiv rounded overflow-hidden w-100">
                 <p
-                  style={{ backgroundColor: "rgb(233, 42, 42)", cursor:"pointer" }}
+                  style={{ backgroundColor: "#479d78", cursor:"pointer" }}
                   className="w-100 text-white"
                   onClick={(e) => handleDecreaseQty(e, value)}
                 >
@@ -169,7 +170,7 @@ function ComboProductCard({ value, showEdge }) {
                 </p>
                 <p
                   className="w-100 text-white"
-                  style={{ backgroundColor: "rgb(233, 42, 42)" , cursor:"pointer"}}
+                  style={{ backgroundColor: "#479d78" , cursor:"pointer"}}
                   onClick={(e) => handleIncreaseQty(e, value)}
                 > + </p>
               </div>

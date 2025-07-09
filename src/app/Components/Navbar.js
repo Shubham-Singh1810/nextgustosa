@@ -24,7 +24,7 @@ const Navbar = ({ selectedItem }) => {
     if (loggedUserData) {
       router.push("/profile");
     } else {
-      router.push("/signup");
+      router.push("/register");
     }
   };
   const navArr = [
@@ -420,8 +420,7 @@ const handleContinueAnyway = () => {
                       <p
                         style={{ borderColor: "green", cursor:"pointer" }}
                         onClick={(e) => handleIncreaseVarientQty(e, item)}
-                      >
-                        +
+                      >+
                       </p>
                     </div>
                     <p className="text-muted mt-1">
@@ -443,8 +442,7 @@ const handleContinueAnyway = () => {
                 ) + comboCartList?.reduce(
                   (total, item) => total + item.comboPrice * item.quantity,
                   0
-                )+
-                 varientList?.reduce(
+                )+ varientList?.reduce(
                   (total, item) => total + item.variantDiscountedPrice * item.quantity,
                   0
                 )

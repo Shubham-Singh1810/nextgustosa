@@ -186,8 +186,6 @@ const Step1 = ({ next }) => {
     firstName:""
   });
 
-
-
  useEffect(() => {
    console.log("form data" , userFormData)
   }, [userFormData]);

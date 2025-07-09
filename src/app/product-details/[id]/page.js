@@ -1124,8 +1124,8 @@ function page() {
                             src={v?.variantImage}
                             style={{
                               height: "110px",
-                              width: "150px",
-                              borderRadius: "10px 10px 0px 0px",
+                              width: "100%",
+                              borderRadius: "8px 8px 0px 0px",
                             }}
                           />
                           <div className="p-1 px-2">

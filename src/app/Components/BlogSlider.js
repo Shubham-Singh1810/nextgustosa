@@ -21,7 +21,7 @@ function BlogSlider() {
     <div style={{background:"whitesmoke"}} className="py-md-5 py-2">
        <div className="container">
          <h2 className="mb-4" style={{ fontFamily: "poppins" }}>
-        Must Read for Hyzine Business
+        Must Read for Makhana Business
       </h2>
       <div className="row mb-4">
         {list?.map((v, i) => {

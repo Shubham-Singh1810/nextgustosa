@@ -28,11 +28,7 @@ const page = () => {
     localStorage.removeItem("wishList");
 
      console.log("Logged out...");
-        
-     
-    router.push("/login");
- 
-
+    router.push("/register");
     }
 
   return (

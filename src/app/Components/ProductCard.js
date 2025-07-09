@@ -265,12 +265,12 @@ function ProductCard({ value, bgColor, borderRadius, innerHeight, height }) {
       }}
       onClick={() => router.push("/product-details/" + value?._id)}
     >
-      <div className="d-flex justify-content-between align-items-center heartIcon pe-2  position-absolute " style={{zIndex:"99"}} >
+      {/* <div className="d-flex justify-content-between align-items-center heartIcon pe-2  position-absolute " style={{zIndex:"99"}} >
        <h6 className="badge  text-white  bgPrimary p-sm-2 ">
   {value?.categoryId?.length > 0 ? value.categoryId[0].name : "Category"}
 </h6>
 
-      </div>
+      </div> */}
 
       <div className="d-flex justify-content-center position-relative ">
         <img
