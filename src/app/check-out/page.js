@@ -263,7 +263,7 @@ const [step, setStep] = useState(() => {
 
   const handleCloseThanksPopup = () => {
     setSHowThanksPopup(false);
-    router.push("/")
+    router.push("/my-orders")
   }
 
 

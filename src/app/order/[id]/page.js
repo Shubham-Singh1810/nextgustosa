@@ -336,7 +336,7 @@ const handleAddToCartComboLocal = (e, v) => {
     <div>
         <Navbar/>
         <div className="order-details " style={{ backgroundColor: "#f9f9f9" }}>
-        <div className="my-5 py-5">
+        <div className="mb-5 py-5">
           <div className="d-flex gap-3 ms-md-5 ms-2 ps-md-4">
             <img
               src="https://cdn-icons-png.flaticon.com/128/11519/11519951.png"
@@ -344,7 +344,7 @@ const handleAddToCartComboLocal = (e, v) => {
               onClick={() => router.push("/my-orders")}
               className="m-2 "  ></img>
             <div>
-              <h1 className="text-danger fs-3 mt-1">Your Order Details</h1>
+              <h1 className="colorPrimary fs-3 mt-1">Your Order Details</h1>
               <p className="mb-4">
                 Thanks for your order! Check out the details below.
               </p>

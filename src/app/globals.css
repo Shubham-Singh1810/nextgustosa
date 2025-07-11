@@ -3651,9 +3651,9 @@ text-align: center;
     border-radius: 21%;
 }
 .buyAgain{
-  background-color: #f9f0f0;
+  background-color: #e7f9f1;
   padding: 5px 20px;
-  border: 1px solid #f5cbcb;
+  border: 1px solid #b5d6c7;
 }
 
 .btn-review {
@@ -3706,4 +3706,27 @@ text-align: center;
 
 .nutrientTable{
   width: 100%;
+}
+
+/* order amount progres bar */
+
+.shipping-progress {
+  height: 20px;
+  margin-top: 5px;
+  position: relative;
+}
+
+.shipping-progress .progress {
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.shipping-progress .milestone-label {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  font-size: 13px;
+  color: #666;
 }

@@ -5,7 +5,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { LoggedDataContext } from "../context/Context";
 import { toast } from "react-toastify";
 import { addressCreate,addressList, addressUpdate,} from "../services/address.service";
-import { getNames, getCodeList } from 'country-list';
+import { getNames } from 'country-list';
 
 const Step2 = ({
   next,
@@ -21,18 +21,26 @@ const Step2 = ({
 
   const [addresses, setAddresses] = useState([]);
   const fetchAddresses = async () => {
-    try {
-      const res = await addressList({ userId: loggedUserData?._id });
-      setAddresses(res?.data || []);
-      setAddressForm(res?.data[0]);
-      if (res.data.length === 0) {
+  try {
+
+    const res = await addressList(); 
+
+    const filteredAddresses = res?.data?.filter(
+      (addr) => addr?.userId?._id === loggedUserData?._id
+    );
+
+    setAddresses(filteredAddresses || []);
+
+    if (filteredAddresses.length > 0) {
+      setAddressForm(filteredAddresses[0]);
+    } else {
       setEditAddress(true); 
-      console.log("edit addres is" ,true)
-    } 
-    } catch (error) {
-      console.error("Error fetching addresses:", error);
     }
-  };
+  } catch (error) {
+    console.error("Error fetching addresses:", error);
+  }
+};
+
   useEffect(() => {
     if (loggedUserData) {
       fetchAddresses();
@@ -166,16 +174,8 @@ const Step2 = ({
         <h3 className="my-3 text-center">Delivery Address </h3>
         <div className="d-flex justify-content-between align-items-center mx-2 mb-2 steps">
           <h6 className="mb-0 fw-bold">Delivery Address</h6>
-          {addresses?.length > 1 && (
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/6364/6364586.png"
-              style={{
-                height: "15px",
-                opacity: "0.6",
-                cursor: "pointer",
-              }}
-              onClick={() => setShowAddress(!showAddress)}
-            />
+          {addresses?.length > 0 && (
+               <p className=" underline"  onClick={() => setShowAddress(!showAddress)}>Change Address</p>
           )}
         </div>
 

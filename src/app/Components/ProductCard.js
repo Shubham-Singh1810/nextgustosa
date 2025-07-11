@@ -166,6 +166,7 @@ import React, { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { LoggedDataContext } from "../context/Context";
+import CartSidebar from "./CartSidebar";
 
 function ProductCard({ value, bgColor, borderRadius, innerHeight, height }) {
   const { loggedUserData, cartList, setCartList, wishList, setWishList } =
@@ -188,7 +189,7 @@ function ProductCard({ value, bgColor, borderRadius, innerHeight, height }) {
 
       localStorage.setItem("cartList", JSON.stringify(localCartList));
       setCartList(localCartList);
-      toast.success("Item Added To the cart");
+      // toast.success("Item Added To the cart");
     } catch (error) {
       console.log("Something went wrong", error);
     }
@@ -207,11 +208,11 @@ function ProductCard({ value, bgColor, borderRadius, innerHeight, height }) {
       if (existingProductIndex !== -1) {
         // If exists, remove it
         localWishList.splice(existingProductIndex, 1);
-        toast.info("Item Removed From Wishlist");
+        // toast.info("Item Removed From Wishlist");
       } else {
         // If not exists, add it
         localWishList.push(v);
-        toast.success("Item Added To Wishlist");
+        // toast.success("Item Added To Wishlist");
       }
 
       // Update localStorage and state
@@ -367,13 +368,16 @@ function ProductCard({ value, bgColor, borderRadius, innerHeight, height }) {
               </p>
             </div>
           ) : (
-            <button onClick={(e) => handleAddToCartLocal(e, value)}>
+            <button onClick={(e) => handleAddToCartLocal(e, value)} data-bs-toggle="offcanvas"
+              data-bs-target="#cartSidebar" >
               {" "}
               Add To Cart{" "}
             </button>
           )}
         </div>
+
       </div>
+      <CartSidebar/>
     </div>
   );
 }

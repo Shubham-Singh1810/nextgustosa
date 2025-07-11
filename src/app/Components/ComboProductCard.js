@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { addToCartServ } from "../services/product.service";
 import { toast } from "react-toastify";
 import { LoggedDataContext } from "../context/Context";
+import CartSidebar from "./CartSidebar";
 
 function ComboProductCard({ value, showEdge }) {
   const { loggedUserData, comboCartList, setComboCartList, wishList, setWishList } =
@@ -27,7 +28,7 @@ function ComboProductCard({ value, showEdge }) {
 
       localStorage.setItem("comboCartList", JSON.stringify(localComboCartList));
       setComboCartList(localComboCartList);
-      toast.success("Item Added To the cart");
+      // toast.success("Item Added To the cart");
     } catch (error) {
       console.log("Something went wrong", error);
     }
@@ -47,7 +48,7 @@ function ComboProductCard({ value, showEdge }) {
       if (existingProductIndex !== -1) {
         // If exists, remove it
         localWishList.splice(existingProductIndex, 1);
-        toast.info("Item Removed From Wishlist");
+        // toast.info("Item Removed From Wishlist");
       } else {
         // If not exists, add it
         localWishList.push(v);
@@ -175,7 +176,9 @@ function ComboProductCard({ value, showEdge }) {
                 > + </p>
               </div>
             ) : (
-              <button onClick={(e) => handleAddToCartComboLocal(e, value)}>
+              <button onClick={(e) => handleAddToCartComboLocal(e, value)} 
+              data-bs-toggle="offcanvas"
+              data-bs-target="#cartSidebar">
                 {" "}
                 Add To Cart{" "}
               </button>
@@ -187,6 +190,7 @@ function ComboProductCard({ value, showEdge }) {
           <div className="lowerCircle"></div>
         </div>
       )}
+      <CartSidebar/>
     </div>
   );
 }
