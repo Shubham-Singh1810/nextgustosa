@@ -22,9 +22,21 @@ import { useWindowSize } from '@react-hook/window-size';
 import Confetti from 'react-confetti'
 
 const Page = () => {
-  const { loggedUserData , deliveryCharge, cartList , setCartList , comboCartList , setComboCartList , varientList , setVarientList } = useContext(LoggedDataContext);
+  const { loggedUserData , deliveryCharge, setDeliveryCharge, cartList , setCartList , comboCartList , setComboCartList , varientList , setVarientList } = useContext(LoggedDataContext);
   const router  = useRouter();
   // const [step, setStep] = useState(1);
+
+ 
+
+ useEffect(() => {
+  const storedDeliveryCharge = localStorage.getItem("deliveryCharge");
+  if (storedDeliveryCharge) {
+    const parsed = parseFloat(storedDeliveryCharge);
+    setDeliveryCharge(parsed);
+    console.log("delivery charge loaded from localStorage:", parsed);
+  }
+}, []);
+
 
   useEffect(() => {
   // Check if overflow is being set to 'hidden'
@@ -60,11 +72,10 @@ const [step, setStep] = useState(() => {
     city: "",
     state: "",
     pincode: "",
-    country: "",
+    country: "India",
     fullName: "",
     email:""
   });
-
  
   const [discount, setDiscount] = useState(0);
  
@@ -192,10 +203,6 @@ const [step, setStep] = useState(() => {
   const calculatedDiscount = originalTotal - subTotal;
   setDiscount(calculatedDiscount);
 
-    // const minCityPrice = cityPrice || 0;
-
-    // const deliveryCharge = subTotal >= minCityPrice ? 0 : 100;
-    // setDeliveryCharge(deliveryCharge);
 
     setOrderPayload({
       userId: loggedUserData._id,
@@ -228,7 +235,6 @@ const [step, setStep] = useState(() => {
       modeOfPayment:paymentMethod
     });
 
-    // setAmountReached(subTotal >= minCityPrice);
 
     console.log("payload", orderPayload);
     console.log("comboCartList" , comboCartList) 

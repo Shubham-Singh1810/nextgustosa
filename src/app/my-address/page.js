@@ -363,7 +363,7 @@ const Page = () => {
               >
                 <div className="d-flex gap-2">
                   <img
-                    src="https://cdn-icons-png.flaticon.com/128/10308/10308038.png"
+                    src="https://cdn-icons-png.flaticon.com/128/10015/10015328.png"
                     alt="Add"
                   />
                   <p className="mb-0">Add new address</p>

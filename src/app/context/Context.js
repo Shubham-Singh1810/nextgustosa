@@ -76,6 +76,18 @@ useEffect(() => {
   }
 }, []);
 
+useEffect(() => {
+  const storedDeliveryCharge = localStorage.getItem("deliveryCharge");
+  if (storedDeliveryCharge) {
+    setDeliveryCharge(parseFloat(storedDeliveryCharge));
+  }
+}, []);
+
+useEffect(() => {
+  localStorage.setItem("deliveryCharge", deliveryCharge);
+}, [deliveryCharge]);
+
+
   return (
     <LoggedDataContext.Provider value={{setWishList, wishList, cartList, setCartList, comboCartList, setComboCartList, varientList , setVarientList , loggedUserData, updateLoggedUserData, setProductList:setProductList, productList:productList , deliveryCharge , setDeliveryCharge }}>
       {children}

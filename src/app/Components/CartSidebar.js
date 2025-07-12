@@ -13,6 +13,7 @@ const CartSidebar = () => {
     comboCartList,
     varientList,
     setVarientList,
+    deliveryCharge,
     setDeliveryCharge,
   } = useContext(LoggedDataContext);
   const router = useRouter();
@@ -158,12 +159,24 @@ const CartSidebar = () => {
       router.push("/check-out");
     } else {
       setDeliveryCharge(policyData.deliveryCharge);
+        localStorage.setItem("deliveryCharge", deliveryCharge.toString());
+      
       router.push("/check-out");
     }
   };
 
-   const amountRemaining = policyData?.minimumFreeOrderAmount - totalSubtotal;
-  const progressPercent = Math.min((totalSubtotal / policyData?.minimumFreeOrderAmount) * 100, 100);
+//   useEffect(() => {
+//   if (deliveryCharge !== 0) {
+//     localStorage.setItem("deliveryCharge", deliveryCharge.toString());
+//   }
+// }, [deliveryCharge]);
+
+
+  const amountRemaining = policyData?.minimumFreeOrderAmount - totalSubtotal;
+  const progressPercent = Math.min(
+    (totalSubtotal / policyData?.minimumFreeOrderAmount) * 100,
+    100
+  );
 
   return (
     <div>
@@ -196,54 +209,68 @@ const CartSidebar = () => {
             data-bs-dismiss="offcanvas"
           ></button>
         </div>
-         
-         {(cartList?.length > 0 ||
-            comboCartList?.length > 0 ||
-            varientList?.length > 0) &&
-        <div className="AmountDetails">
-          {policyData?.minimumFreeOrderAmount > totalSubtotal ? (
-            <p>
-              Add products worth{" "}
-              <span className=" fw-bold">
-                ₹{policyData?.minimumFreeOrderAmount - totalSubtotal}
-              </span>{" "}
-              to unlock Free Shipping!
-            </p>
-          ) : (
-            <p className="text-center fw-bold">
-              You’ve unlocked Free Shipping!
-            </p>
-          )}
 
-          {/* progress bar */}
-         <div className="d-flex align-items-center">
-          <div className="shipping-progress position-relative w-100">
-            <div className="progress">
-              <div
-                className="progress-bar bg-dark"
-                 role="progressbar"
-                  style={{ width: `${progressPercent}%` }}
-                  aria-valuenow={progressPercent}
-                  aria-valuemin="0"
-                   aria-valuemax="100"
-                />
-            </div>
+        {(cartList?.length > 0 ||
+          comboCartList?.length > 0 ||
+          varientList?.length > 0) && (
+          <div className="AmountDetails">
+            {policyData?.minimumFreeOrderAmount > totalSubtotal ? (
+              <p>
+                Add products worth{" "}
+                <span className=" fw-bold">
+                  ₹{policyData?.minimumFreeOrderAmount - totalSubtotal}
+                </span>{" "}
+                to unlock Free Shipping!
+              </p>
+            ) : (
+              <p className="text-center fw-bold">
+                You’ve unlocked Free Shipping!
+              </p>
+            )}
+
+            {/* progress bar */}
+
+            <div className="text-end text-muted small">
+                  ₹{policyData?.minimumFreeOrderAmount}
+                </div>
+
+            <div className="d-flex align-items-baseline">
+              <div className="shipping-progress position-relative w-100">
+                <div className="progress">
+                  <div
+                    className="progress-bar bg-dark"
+                    role="progressbar"
+                    style={{ width: `${progressPercent}%` }}
+                    aria-valuenow={progressPercent}
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  />
+                </div>
+
                 
-              
-             <div className="milestone-label text-muted small">
-               ₹{policyData?.minimumFreeOrderAmount} 
-              
+              </div>
+              <div>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/7610/7610711.png"
+                  style={{
+                    width: "27px",
+                    height: "27px",
+                    borderRadius: "50%",
+                    border: "1px solid black",
+                    padding: "3px",
+                  }}
+                ></img>
+                {/* <p className="text-center" style={{fontSize:"10px"}}>Free shipping</p> */}
+              </div>
+            </div>
+
+            <div className="text-end text-muted small">
+                  Free Shipping
                 </div>
           </div>
-          <div>
-           <img src="https://cdn-icons-png.flaticon.com/128/7610/7610711.png" style={{width:"27px" , height:"27px" , borderRadius:"50%" , border:"1px solid black" , padding:"3px"}}></img>
-           {/* <p className="text-center" style={{fontSize:"10px"}}>Free shipping</p> */}
-           </div>
-          </div>
-        </div>
-        }
+        )}
 
-        <div className="offcanvas-body" style={{paddingBottom:"20%"}}>
+        <div className="offcanvas-body" style={{ paddingBottom: "20%" }}>
           {cartList?.map((item) => (
             <div className="d-flex mb-3" key={item.id}>
               <img
@@ -368,12 +395,15 @@ const CartSidebar = () => {
           {(cartList?.length > 0 ||
             comboCartList?.length > 0 ||
             varientList?.length > 0) && (
-            <div className=" position-absolute bg-white" style={{width:"90%" , bottom:"1%"}}>
-            
+            <div
+              className=" position-absolute bg-white"
+              style={{ width: "90%", bottom: "1%" }}
+            >
               <hr />
 
-              <h6 className="">
-                SUBTOTAL: ₹ (
+              <div className="d-flex gap-1">
+                <h6 className="">SUBTOTAL: </h6>
+              <h6 className="fw-bold"> ₹ 
                 {cartList?.reduce(
                   (total, item) => total + item.discountedPrice * item.quantity,
                   0
@@ -386,25 +416,25 @@ const CartSidebar = () => {
                     (total, item) =>
                       total + item.variantDiscountedPrice * item.quantity,
                     0
-                  )}
-                )
-              </h6>
-              
-              <div className="d-flex gap-2">
-                 <button
-                className="btn  text-dark w-100 mt-3" style={{backgroundColor:"#eaf9f2" , border:"1px solid #b1d4c5"}}
-                //   className="btn-close"
-            data-bs-dismiss="offcanvas"
-              >
-                Continue Shopping
-              </button>
-              <button
-                className="btn btn-success w-100 mt-3"
-                onClick={handleProceed}
-              >
-               Checkout
-              </button>
-              
+                  )}</h6>
+              </div>
+
+              <div className="">
+                <button
+                  className="btn  text-dark w-100 mt-2"
+                  style={{ backgroundColor: "rgb(234 231 231)", }}
+                  onClick={handleProceed}
+                >
+                  Checkout
+                </button>
+
+                <button
+                  className="btn btn-success w-100 mt-2 "
+                  //   className="btn-close"
+                  data-bs-dismiss="offcanvas"
+                >
+                  Continue Shopping
+                </button>
               </div>
             </div>
           )}

@@ -480,7 +480,7 @@ const handleAddToCartComboLocal = (e, v) => {
                                     >
                                       <p
                                         style={{
-                                          backgroundColor: "#6d0d0c",
+                                          backgroundColor: "#3d9970",
                                           height: "100%",
                                         }}
                                         className="w-100 text-white mb-0 d-flex justify-content-center align-items-center "
@@ -506,7 +506,7 @@ const handleAddToCartComboLocal = (e, v) => {
                                       <p
                                         className="w-100 text-white mb-0 d-flex justify-content-center align-items-center"
                                         style={{
-                                          backgroundColor: "#6d0d0c",
+                                          backgroundColor: "#3d9970",
                                           height: "100%",
                                         }}
                                         onClick={(e) =>
@@ -594,7 +594,7 @@ const handleAddToCartComboLocal = (e, v) => {
                                     >
                                       <p
                                         style={{
-                                          backgroundColor: "#6d0d0c",
+                                          backgroundColor: "#3d9970",
                                           height: "100%",
                                         }}
                                         className="w-100 text-white mb-0 d-flex justify-content-center align-items-center "
@@ -620,7 +620,7 @@ const handleAddToCartComboLocal = (e, v) => {
                                       <p
                                         className="w-100 text-white mb-0 d-flex justify-content-center align-items-center"
                                         style={{
-                                          backgroundColor: "#6d0d0c",
+                                          backgroundColor: "#3d9970",
                                           height: "100%",
                                         }}
                                         onClick={(e) =>
@@ -705,7 +705,7 @@ const handleAddToCartComboLocal = (e, v) => {
                 >
                   <p
                     style={{
-                      backgroundColor: "#6d0d0c",
+                      backgroundColor: "#3d9970",
                       height: "100%",
                     }}
                     className="w-100 text-white mb-0 d-flex justify-content-center align-items-center"
@@ -729,7 +729,7 @@ const handleAddToCartComboLocal = (e, v) => {
                   <p
                     className="w-100 text-white mb-0 d-flex justify-content-center align-items-center"
                     style={{
-                      backgroundColor: "#6d0d0c",
+                      backgroundColor: "#3d9970",
                       height: "100%",
                     }}
                     onClick={(e) => handleIncreaseVarientQty(e, matchedVariant)}

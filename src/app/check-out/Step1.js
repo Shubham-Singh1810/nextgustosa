@@ -311,8 +311,7 @@ const Step1 = ({ next }) => {
 
                   {showPhoneInput ? (
                     <button
-                      className="btn  w-100  mt-3 text-white"
-                      style={{ backgroundColor: "maroon" }}
+                      className="btn  w-100  mt-3 text-white bgPrimary"
                       onClick={() => otpVerifyFunc()}
                       disabled={otpLoading}
                     >
@@ -324,8 +323,7 @@ const Step1 = ({ next }) => {
                     </button>
                   ) : (
                     <button
-                      className="btn w-100 mt-2 text-white"
-                      style={{ backgroundColor: "maroon" }}
+                      className="btn w-100 mt-2 text-white bgPrimary"
                       onClick={sendOtpFunc}
                       disabled={phoneLoading}
                     >
