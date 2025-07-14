@@ -61,7 +61,7 @@ function Faq() {
             style={{ height: "40px" }}
           />
           <h2 className="ms-2" style={{ fontFamily: "poppins" }}>
-           <u>Commanlly Asked Questions</u> 
+           <u>Commonly Asked Questions</u>
           </h2>
         </div>
         <div className="row mb-4">

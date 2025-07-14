@@ -16,11 +16,7 @@ const Footer = () => {
               style={{height:"80px", borderRadius:"4px"}}
             />
             <p className="text-white mt-4">
-            We’re passionate about crafting delicious and nutritious snacks
-              that bring joy to your daily life. Our specialty lies in creating
-              mouth-watering makhana flavors that cater to diverse tastes and
-              dietary preferences. We make snacking healthier and more enjoyable
-              for everyone.
+           We’re passionate about crafting delicious, nutritious snacks that bring joy to your daily life. Our specialty lies in creating mouthwatering makhana flavors that cater to diverse tastes and dietary needs. We’re on a mission to make snacking healthier and more enjoyable for everyone.
             </p>
 
             <div className="social-icons d-flex gap-2 mt-4">
@@ -38,7 +34,7 @@ const Footer = () => {
             <div className="footer-links">
               <Link href="/cookie-policy"> <p>Cookie Policy</p> </Link>
               {/* <p>Disclaimer</p> */}
-              <Link href="/term-conditions"><p>Terms & Condition</p></Link>
+              <Link href="/term-conditions"><p>Terms & Conditions</p></Link>
               <Link href="/privacy-policy"><p>Privacy Policy</p></Link>
               <Link href="/refund-returns"><p>Refund & Returns</p> </Link>
                 <Link href="/shipping-policy"> <p>Shipping Policy</p> </Link>

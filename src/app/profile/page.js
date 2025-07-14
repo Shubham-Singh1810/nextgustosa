@@ -209,7 +209,7 @@ const Profile = () => {
     if (loggedUserData) {
       setFormData({
         firstName: loggedUserData.firstName || "",
-        lastName: loggedUserData.lastName || "",
+        lastName: loggedUserData.lastName || "xyz",
         email: loggedUserData.email || "",
         profileImage: loggedUserData.profileImage || "",
       });
@@ -249,7 +249,7 @@ const Profile = () => {
   form.append("userId", loggedUserData._id);
   form.append("phone", loggedUserData.phone);
   form.append("firstName", formData.firstName);
-  form.append("lastName", formData.lastName);
+  form.append("lastName", "xyz");
   form.append("email", formData.email);
 
     if (fileInputRef.current && fileInputRef.current.files[0]) {

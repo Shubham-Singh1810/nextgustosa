@@ -425,12 +425,12 @@ useEffect(() => {
                   <h5 style={{ minWidth: "140px" }}>Stock Quantity : </h5>
                   <h5 className="text-secondary">{details?.stockQuantity}</h5>
                 </div>
-                <div className="d-flex gap-1">
+                {/* <div className="d-flex gap-1">
                   <h5 className="mb-0" style={{ minWidth: "140px" }}>
                     Type :{" "}
                   </h5>
                   <h5 className="text-secondary">{details?.productType}</h5>
-                </div>
+                </div> */}
             </div>
           </div>
         </div>
