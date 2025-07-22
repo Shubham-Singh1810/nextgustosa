@@ -3299,6 +3299,15 @@ text-align: center;
   font-size: 30px !important;
   opacity: 1 !important;
 }
+/* @media (max-width:545px) {
+   .slick-prev:before, .slick-next:before {
+  font-size: 18px !important;
+}
+.productSliderDiv{
+  padding-left: 8% !important;
+  padding-right: 8% !important;
+}
+} */
 .productDetailsDiv h1{
   /* font-family: poppins; */
   font-family: var(--font-secondary);

@@ -14,12 +14,18 @@ import { toast } from "react-toastify";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-
 const page = () => {
-  const { cartList, setCartList , varientList , setVarientList  , comboCartList, setComboCartList} = useContext(LoggedDataContext);
+  const {
+    cartList,
+    setCartList,
+    varientList,
+    setVarientList,
+    comboCartList,
+    setComboCartList,
+  } = useContext(LoggedDataContext);
   const [details, setDetails] = useState(null);
   const [loader, setLoader] = useState(null);
- 
+
   const { id } = useParams();
   const router = useRouter();
 
@@ -89,7 +95,7 @@ const page = () => {
     setReviewProductId(id);
     console.log("product id", reviewProductId);
   };
-  
+
   useEffect(() => {
     if (reviewProductId) {
       console.log("SET SUCCESSFULLY:", reviewProductId);
@@ -101,12 +107,14 @@ const page = () => {
   const handleAddToCartLocal = (e, v) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("added item" , v.productId)
-    const value = v.productId
+    console.log("added item", v.productId);
+    const value = v.productId;
     try {
       let localCartList = JSON.parse(localStorage.getItem("cartList")) || [];
 
-      const existingProduct = localCartList.find((item) => item._id === value._id);
+      const existingProduct = localCartList.find(
+        (item) => item._id === value._id
+      );
 
       if (existingProduct) {
         existingProduct.quantity += 1;
@@ -125,10 +133,12 @@ const page = () => {
   const handleIncreaseQty = (e, v) => {
     e.preventDefault();
     e.stopPropagation();
-     const value = v.productId
+    const value = v.productId;
     let localCartList = JSON.parse(localStorage.getItem("cartList")) || [];
 
-    const existingProduct = localCartList.find((item) => item._id === value._id);
+    const existingProduct = localCartList.find(
+      (item) => item._id === value._id
+    );
     if (existingProduct) {
       existingProduct.quantity += 1;
     }
@@ -140,10 +150,12 @@ const page = () => {
   const handleDecreaseQty = (e, v) => {
     e.preventDefault();
     e.stopPropagation();
-     const value = v.productId
+    const value = v.productId;
     let localCartList = JSON.parse(localStorage.getItem("cartList")) || [];
 
-    const existingProduct = localCartList.find((item) => item._id === value._id);
+    const existingProduct = localCartList.find(
+      (item) => item._id === value._id
+    );
     if (existingProduct) {
       existingProduct.quantity -= 1;
       if (existingProduct.quantity <= 0) {
@@ -155,17 +167,20 @@ const page = () => {
     setCartList(localCartList);
   };
 
-//   combo add to cart
+  //   combo add to cart
 
-const handleAddToCartComboLocal = (e, v) => {
+  const handleAddToCartComboLocal = (e, v) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("added item" , v.comboProductId)
-    const value = v.comboProductId
+    console.log("added item", v.comboProductId);
+    const value = v.comboProductId;
     try {
-      let localCartList = JSON.parse(localStorage.getItem("comboCartList")) || [];
+      let localCartList =
+        JSON.parse(localStorage.getItem("comboCartList")) || [];
 
-      const existingProduct = localCartList.find((item) => item._id === value._id);
+      const existingProduct = localCartList.find(
+        (item) => item._id === value._id
+      );
 
       if (existingProduct) {
         existingProduct.quantity += 1;
@@ -181,13 +196,16 @@ const handleAddToCartComboLocal = (e, v) => {
     }
   };
 
-    const handleIncreaseComboQty = (e, v) => {
+  const handleIncreaseComboQty = (e, v) => {
     e.preventDefault();
     e.stopPropagation();
-        const value = v.comboProductId
-    let localComboCartList = JSON.parse(localStorage.getItem("comboCartList")) || [];
+    const value = v.comboProductId;
+    let localComboCartList =
+      JSON.parse(localStorage.getItem("comboCartList")) || [];
 
-    const existingProduct = localComboCartList.find((item) => item._id === value._id);
+    const existingProduct = localComboCartList.find(
+      (item) => item._id === value._id
+    );
     if (existingProduct) {
       existingProduct.quantity += 1;
     }
@@ -199,14 +217,19 @@ const handleAddToCartComboLocal = (e, v) => {
   const handleDecreaseComboQty = (e, v) => {
     e.preventDefault();
     e.stopPropagation();
-        const value = v.comboProductId
-    let localComboCartList = JSON.parse(localStorage.getItem("comboCartList")) || [];
+    const value = v.comboProductId;
+    let localComboCartList =
+      JSON.parse(localStorage.getItem("comboCartList")) || [];
 
-    const existingProduct = localComboCartList.find((item) => item._id === value._id);
+    const existingProduct = localComboCartList.find(
+      (item) => item._id === value._id
+    );
     if (existingProduct) {
       existingProduct.quantity -= 1;
       if (existingProduct.quantity <= 0) {
-        localComboCartList = localComboCartList.filter((item) => item._id !== value._id);
+        localComboCartList = localComboCartList.filter(
+          (item) => item._id !== value._id
+        );
       }
     }
 
@@ -214,46 +237,48 @@ const handleAddToCartComboLocal = (e, v) => {
     setComboCartList(localComboCartList);
   };
 
-
   //varient add to cart
 
-   const handleAddToVarientCartLocal = (e, v , item) => {
-      e.preventDefault();
-      e.stopPropagation();
-      try {
-        console.log("varient added in cart" , v)
-        let localVarientList = JSON.parse(localStorage.getItem("varientList")) || [];
-  
-         const updatedVariant = {
+  const handleAddToVarientCartLocal = (e, v, item) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      console.log("varient added in cart", v);
+      let localVarientList =
+        JSON.parse(localStorage.getItem("varientList")) || [];
+
+      const updatedVariant = {
         ...v,
         productId: item?.productId?._id,
         name: item?.productId?.name,
         // productHeroImage: v?.productId?.productHeroImage
       };
 
-      console.log("varient added in cart" , updatedVariant)
-  
-        const existingProduct = localVarientList.find((item) => item._id ===  updatedVariant._id);
-  
-        if (existingProduct) {
-          existingProduct.quantity += 1;
-        } else {
-         localVarientList.push({ ...updatedVariant, quantity: 1 });
-        }
+      console.log("varient added in cart", updatedVariant);
 
-  
-        localStorage.setItem("varientList", JSON.stringify(localVarientList));
-        setVarientList(localVarientList);
-        toast.success("Item Added To the cart");
-      } catch (error) {
-        console.log("Something went wrong", error);
+      const existingProduct = localVarientList.find(
+        (item) => item._id === updatedVariant._id
+      );
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        localVarientList.push({ ...updatedVariant, quantity: 1 });
       }
-    };
+
+      localStorage.setItem("varientList", JSON.stringify(localVarientList));
+      setVarientList(localVarientList);
+      toast.success("Item Added To the cart");
+    } catch (error) {
+      console.log("Something went wrong", error);
+    }
+  };
 
   const handleIncreaseVarientQty = (e, v) => {
     e.preventDefault();
     e.stopPropagation();
-    let localVarientList = JSON.parse(localStorage.getItem("varientList")) || [];
+    let localVarientList =
+      JSON.parse(localStorage.getItem("varientList")) || [];
 
     const existingProduct = localVarientList.find((item) => item._id === v._id);
     if (existingProduct) {
@@ -267,13 +292,16 @@ const handleAddToCartComboLocal = (e, v) => {
   const handleDecreaseVarientQty = (e, v) => {
     e.preventDefault();
     e.stopPropagation();
-    let localVarientList = JSON.parse(localStorage.getItem("varientList")) || [];
+    let localVarientList =
+      JSON.parse(localStorage.getItem("varientList")) || [];
 
     const existingProduct = localVarientList.find((item) => item._id === v._id);
     if (existingProduct) {
       existingProduct.quantity -= 1;
       if (existingProduct.quantity <= 0) {
-        localVarientList = localVarientList.filter((item) => item._id !== v._id);
+        localVarientList = localVarientList.filter(
+          (item) => item._id !== v._id
+        );
       }
     }
 
@@ -281,68 +309,69 @@ const handleAddToCartComboLocal = (e, v) => {
     setVarientList(localVarientList);
   };
 
-   const formattedStatusFlow = details?.statusHistory?.map((log) => ({
-      key: log.status,
-      icon:
-        log.status === "pending"
-          ? "🕓"
-          : log.status === "ssRejected"
-          ? "❗"
-          : log.status === "approved"
-          ? "💳"
-          : log.status === "orderPlaced"
-          ? "🛒"
-          : log.status === "orderPacked"
-          ? "📦"
-          : log.status === "shipping"
-          ? "🚚"
-          : log.status === "homeDelivery"
-          ? "🏠"
-          : log.status === "lorryPay"
-          ? "🛻"
-          : log.status === "outForDelivery"
-          ? "📍"
-          : log.status === "completed"
-          ? "✅"
-          : log.status === "cancelled"
-          ? "❌"
-          : "⏳",
-      label:
-        log.status === "ssRejected"
-          ? "Rejected"
-          : log.status === "approved"
-          ? "Approved"
-          : log.status === "orderPlaced"
-          ? "Order Placed"
-          : log.status === "orderPacked"
-          ? "Packed"
-          : log.status === "shipping"
-          ? "Shipping"
-          : log.status === "homeDelivery"
-          ? "Home Delivery"
-          : log.status === "lorryPay"
-          ? "Lorry Pay"
-          : log.status === "outForDelivery"
-          ? "Out for Delivery"
-          : log.status === "completed"
-          ? "Completed"
-          : log.status === "cancelled"
-          ? "Cancelled"
-          : "Pending",
-      date: moment(log.updatedAt).format("ddd, DD MMM YYYY - h:mmA"),
-    }));
-  
+  const formattedStatusFlow = details?.statusHistory?.map((log) => ({
+    key: log.status,
+    icon:
+      log.status === "pending"
+        ? "🕓"
+        : log.status === "ssRejected"
+        ? "❗"
+        : log.status === "approved"
+        ? "💳"
+        : log.status === "orderPlaced"
+        ? "🛒"
+        : log.status === "orderPacked"
+        ? "📦"
+        : log.status === "shipping"
+        ? "🚚"
+        : log.status === "homeDelivery"
+        ? "🏠"
+        : log.status === "lorryPay"
+        ? "🛻"
+        : log.status === "outForDelivery"
+        ? "📍"
+        : log.status === "completed"
+        ? "✅"
+        : log.status === "cancelled"
+        ? "❌"
+        : "⏳",
+    label:
+      log.status === "ssRejected"
+        ? "Rejected"
+        : log.status === "approved"
+        ? "Approved"
+        : log.status === "orderPlaced"
+        ? "Order Placed"
+        : log.status === "orderPacked"
+        ? "Packed"
+        : log.status === "shipping"
+        ? "Shipping"
+        : log.status === "homeDelivery"
+        ? "Home Delivery"
+        : log.status === "lorryPay"
+        ? "Lorry Pay"
+        : log.status === "outForDelivery"
+        ? "Out for Delivery"
+        : log.status === "completed"
+        ? "Completed"
+        : log.status === "cancelled"
+        ? "Cancelled"
+        : "Pending",
+    date: moment(log.updatedAt).format("ddd, DD MMM YYYY - h:mmA"),
+  }));
+
   return (
     <div>
-        <Navbar/>
-        <div className="order-details " style={{ backgroundColor: "#f9f9f9" }}>
+      <Navbar />
+      <div className="order-details " style={{ backgroundColor: "#f9f9f9" }}>
         <div className="mb-5 py-5">
           <div className="d-flex gap-3 ms-md-5 ms-2 ps-md-4">
             <img
               src="https://cdn-icons-png.flaticon.com/128/11519/11519951.png"
               style={{ height: "25px", width: "25px", cursor: "pointer" }}
               onClick={() => router.push("/my-orders")}
-              className="m-2 "  ></img>
+              className="m-2 "
+            ></img>
             <div>
               <h1 className="colorPrimary fs-3 mt-1">Your Order Details</h1>
               <p className="mb-4">
@@ -407,32 +436,35 @@ const handleAddToCartComboLocal = (e, v) => {
                       <h5 className="fs-5 mb-4 mt-3">Order status</h5>
 
                       {/* Order Status */}
-                  
-                   {details?.status === "pending" &&
-                        <p>Your order has been placed and is pending confirmation from our team.</p>
-                   }
-                  
-                <ul className="order-tracker ps-0">
-                  {formattedStatusFlow?.map((step, idx) => (
-                    <li key={idx} className="completed">
-                      <div className="icon">{step.icon}</div>
-                      <div className="details">
-                        <strong>{step.label}</strong>
-                        <div className="text-muted small">{step.date}</div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-             
+
+                      {details?.status === "pending" && (
+                        <p>
+                          Your order has been placed and is pending confirmation
+                          from our team.
+                        </p>
+                      )}
+
+                      <ul className="order-tracker ps-0">
+                        {formattedStatusFlow?.map((step, idx) => (
+                          <li key={idx} className="completed">
+                            <div className="icon">{step.icon}</div>
+                            <div className="details">
+                              <strong>{step.label}</strong>
+                              <div className="text-muted small">
+                                {step.date}
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
 
                   <div className="col-12 mb-3">
                     <div className="rounded-3 shadow-sm bg-white p-md-3 px-md-5 p-1">
                       <h5 className="fs-5 mb-4 mt-3">Products</h5>
-                      {details?.product?.length > 0  &&
+                      {details?.product?.length > 0 &&
                         details.product.map((item, index) => (
-                        
                           <div
                             key={item._id}
                             className="d-flex flex-sm-nowrap flex-wrap gap-4 mb-4 border p-3 align-items-center"
@@ -499,7 +531,8 @@ const handleAddToCartComboLocal = (e, v) => {
                                       >
                                         {
                                           cartList.find(
-                                            (obj) => obj._id === item?.productId._id
+                                            (obj) =>
+                                              obj._id === item?.productId._id
                                           )?.quantity
                                         }
                                       </p>
@@ -520,7 +553,7 @@ const handleAddToCartComboLocal = (e, v) => {
                                     <button
                                       className="buyAgain rounded-3 "
                                       onClick={(e) =>
-                                        handleAddToCartLocal(e , item)
+                                        handleAddToCartLocal(e, item)
                                       }
                                     >
                                       Buy Again
@@ -544,10 +577,9 @@ const handleAddToCartComboLocal = (e, v) => {
                             </div>
                           </div>
                         ))}
-                        
-                         {details?.comboProduct?.length > 0  &&
+
+                      {details?.comboProduct?.length > 0 &&
                         details.comboProduct.map((item, index) => (
-                        
                           <div
                             key={item._id}
                             className="d-flex flex-sm-nowrap flex-wrap gap-4 mb-4 border p-3 align-items-center"
@@ -583,7 +615,8 @@ const handleAddToCartComboLocal = (e, v) => {
                               <div className="d-flex gap-2">
                                 <div>
                                   {comboCartList?.find(
-                                    (obj) => obj._id === item?.comboProductId?._id
+                                    (obj) =>
+                                      obj._id === item?.comboProductId?._id
                                   ) ? (
                                     <div
                                       className="d-flex align-items-center counterDiv w-100 overflow-hidden"
@@ -613,7 +646,9 @@ const handleAddToCartComboLocal = (e, v) => {
                                       >
                                         {
                                           comboCartList.find(
-                                            (obj) => obj._id === item?.comboProductId._id
+                                            (obj) =>
+                                              obj._id ===
+                                              item?.comboProductId._id
                                           )?.quantity
                                         }
                                       </p>
@@ -634,7 +669,7 @@ const handleAddToCartComboLocal = (e, v) => {
                                     <button
                                       className="buyAgain rounded-3 "
                                       onClick={(e) =>
-                                        handleAddToCartComboLocal(e , item)
+                                        handleAddToCartComboLocal(e, item)
                                       }
                                     >
                                       Buy Again
@@ -647,7 +682,9 @@ const handleAddToCartComboLocal = (e, v) => {
                                     <button
                                       class="btn-review"
                                       onClick={() =>
-                                        handleReviewShow(item?.comboProductId?._id)
+                                        handleReviewShow(
+                                          item?.comboProductId?._id
+                                        )
                                       }
                                     >
                                       Add Review
@@ -659,116 +696,138 @@ const handleAddToCartComboLocal = (e, v) => {
                           </div>
                         ))}
 
-                        {details?.variantProduct?.length > 0 &&
-             details.variantProduct.map((item) => {
-             const matchedVariant = item?.productId?.productVariants?.find(
-            (v) => v._id === item.variantId
-              );
+                      {details?.variantProduct?.length > 0 &&
+                        details.variantProduct.map((item) => {
+                          const matchedVariant =
+                            item?.productId?.productVariants?.find(
+                              (v) => v._id === item.variantId
+                            );
 
-    return (
-      <div
-        key={item._id}
-        className="d-flex flex-sm-nowrap flex-wrap gap-4 mb-4 border p-3 align-items-center"
-        style={{ borderRadius: "10px" }}
-      >
-        <img
-          src={item?.productId?.productHeroImage}
-          alt={item?.productId?.name}
-          style={{
-            width: "80px",
-            height: "80px",
-            objectFit: "cover",
-            borderRadius: "7px",
-          }}
-        />
-        <div className="d-flex flex-sm-nowrap flex-wrap justify-content-between w-100">
-          <div>
-            <h6 className="mb-1 orderProductName">{item?.productId?.name}</h6>
-            <p className="mb-1 text-muted">
-              Quantity: <strong>{item?.quantity}</strong>
-            </p>
-          </div>
+                          return (
+                            <div
+                              key={item._id}
+                              className="d-flex flex-sm-nowrap flex-wrap gap-4 mb-4 border p-3 align-items-center"
+                              style={{ borderRadius: "10px" }}
+                            >
+                              <img
+                                src={item?.productId?.productHeroImage}
+                                alt={item?.productId?.name}
+                                style={{
+                                  width: "80px",
+                                  height: "80px",
+                                  objectFit: "cover",
+                                  borderRadius: "7px",
+                                }}
+                              />
+                              <div className="d-flex flex-sm-nowrap flex-wrap justify-content-between w-100">
+                                <div>
+                                  <h6 className="mb-1 orderProductName">
+                                    {item?.productId?.name}
+                                  </h6>
+                                  <p className="mb-1 text-muted">
+                                    Quantity: <strong>{item?.quantity}</strong>
+                                  </p>
+                                </div>
 
-          <p className="mb-3" style={{ color: "brown" }}>
-            ₹ <strong>{item?.totalPrice}</strong>
-          </p>
+                                <p className="mb-3" style={{ color: "brown" }}>
+                                  ₹ <strong>{item?.totalPrice}</strong>
+                                </p>
 
-          <div className="d-flex gap-2">
-            <div>
-              {varientList?.find((obj) => obj._id === matchedVariant?._id) ? (
-                <div
-                  className="d-flex align-items-center counterDiv w-100 overflow-hidden"
-                  style={{
-                    borderRadius: "8px",
-                    height: "41px",
-                  }}
-                >
-                  <p
-                    style={{
-                      backgroundColor: "#3d9970",
-                      height: "100%",
-                    }}
-                    className="w-100 text-white mb-0 d-flex justify-content-center align-items-center"
-                    onClick={(e) => handleDecreaseVarientQty(e, matchedVariant)}
-                  >
-                    -
-                  </p>
-                  <p
-                    className="w-100 mb-0 d-flex justify-content-center align-items-center"
-                    style={{
-                      backgroundColor: "#f9f5f5",
-                      height: "100%",
-                    }}
-                  >
-                    {
-                      varientList.find(
-                        (obj) => obj._id === matchedVariant?._id
-                      )?.quantity
-                    }
-                  </p>
-                  <p
-                    className="w-100 text-white mb-0 d-flex justify-content-center align-items-center"
-                    style={{
-                      backgroundColor: "#3d9970",
-                      height: "100%",
-                    }}
-                    onClick={(e) => handleIncreaseVarientQty(e, matchedVariant)}
-                  >
-                    +
-                  </p>
-                </div>
-              ) : (
-                <button
-                  className="buyAgain rounded-3"
-                  onClick={(e) => handleAddToVarientCartLocal(e, matchedVariant , item)}
-                >
-                  Buy Again
-                </button>
-              )}
-            </div>
+                                <div className="d-flex gap-2">
+                                  <div>
+                                    {varientList?.find(
+                                      (obj) => obj._id === matchedVariant?._id
+                                    ) ? (
+                                      <div
+                                        className="d-flex align-items-center counterDiv w-100 overflow-hidden"
+                                        style={{
+                                          borderRadius: "8px",
+                                          height: "41px",
+                                        }}
+                                      >
+                                        <p
+                                          style={{
+                                            backgroundColor: "#3d9970",
+                                            height: "100%",
+                                          }}
+                                          className="w-100 text-white mb-0 d-flex justify-content-center align-items-center"
+                                          onClick={(e) =>
+                                            handleDecreaseVarientQty(
+                                              e,
+                                              matchedVariant
+                                            )
+                                          }
+                                        >
+                                          -
+                                        </p>
+                                        <p
+                                          className="w-100 mb-0 d-flex justify-content-center align-items-center"
+                                          style={{
+                                            backgroundColor: "#f9f5f5",
+                                            height: "100%",
+                                          }}
+                                        >
+                                          {
+                                            varientList.find(
+                                              (obj) =>
+                                                obj._id === matchedVariant?._id
+                                            )?.quantity
+                                          }
+                                        </p>
+                                        <p
+                                          className="w-100 text-white mb-0 d-flex justify-content-center align-items-center"
+                                          style={{
+                                            backgroundColor: "#3d9970",
+                                            height: "100%",
+                                          }}
+                                          onClick={(e) =>
+                                            handleIncreaseVarientQty(
+                                              e,
+                                              matchedVariant
+                                            )
+                                          }
+                                        >
+                                          +
+                                        </p>
+                                      </div>
+                                    ) : (
+                                      <button
+                                        className="buyAgain rounded-3"
+                                        onClick={(e) =>
+                                          handleAddToVarientCartLocal(
+                                            e,
+                                            matchedVariant,
+                                            item
+                                          )
+                                        }
+                                      >
+                                        Buy Again
+                                      </button>
+                                    )}
+                                  </div>
 
-            <div>
-              {details?.status === "completed " && (
-                <button
-                  className="btn-review"
-                  onClick={() => handleReviewShow(item?._id)}
-                >
-                  Add Review
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  })}
-
+                                  <div>
+                                    {details?.status === "completed " && (
+                                      <button
+                                        className="btn-review"
+                                        onClick={() =>
+                                          handleReviewShow(item?._id)
+                                        }
+                                      >
+                                        Add Review
+                                      </button>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                     </div>
                   </div>
                 </div>
 
                 <div className="col-lg-4 col-12">
-
                   <div className="col-12 mb-3">
                     <div className="rounded-3 shadow-sm bg-white p-3 px-4">
                       <div
@@ -789,7 +848,7 @@ const handleAddToCartComboLocal = (e, v) => {
 
                       <div className="d-flex gap-3">
                         <div className="orderName">
-                           <p className="fw-bold  mb-2">Total:</p>
+                          <p className="fw-bold  mb-2">Total:</p>
                           <p className="fw-bold  mb-2">Delivery Charges:</p>
                           <p className="fw-bold  mb-2">Subtotal:</p>
                         </div>
@@ -798,8 +857,11 @@ const handleAddToCartComboLocal = (e, v) => {
                             <p className="mb-2">₹{details?.totalAmount}</p>
                             <p className="mb-2">₹{details?.deliveryCharge}</p>
                             {/* <p className="mb-3">₹100</p> */}
-                         <p className="mb-2">₹{Number(details?.totalAmount) + Number(details?.deliveryCharge)}</p>
-
+                            <p className="mb-2">
+                              ₹
+                              {Number(details?.totalAmount) +
+                                Number(details?.deliveryCharge)}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -808,12 +870,10 @@ const handleAddToCartComboLocal = (e, v) => {
 
                       <div className="d-flex gap-3 align-items-center">
                         <h6>payment Method: </h6>
-                         <p className="mb-2">{details?.modeOfPayment}</p>       
+                        <p className="mb-2">{details?.modeOfPayment}</p>
                       </div>
                     </div>
                   </div>
-
-                  
 
                   <div className="col-12 mb-3">
                     <div className="rounded-3 shadow-sm bg-white p-3 px-4  ">
@@ -936,51 +996,54 @@ const handleAddToCartComboLocal = (e, v) => {
                     </div>
                   </div>
 
-                    <div className="col-12 mb-3">
-                    {details?.status == "completed"?(
+                  <div className="col-12 mb-3">
+                    {details?.status == "completed" ? (
                       <div
-                      className="rounded-3 shadow-sm bg-white p-3 px-4 d-flex justify-content-between"
-                      onClick={() =>
-                        router.push("/orderInvoice/" + details?._id)
-                      }
-                      style={{ cursor: "pointer" }}
-                    >
-                      <div className="d-flex gap-2  align-items-center ">
+                        className="rounded-3 shadow-sm bg-white p-3 px-4 d-flex justify-content-between"
+                        onClick={() =>
+                          router.push("/orderInvoice/" + details?._id)
+                        }
+                        style={{ cursor: "pointer" }}
+                      >
+                        <div className="d-flex gap-2  align-items-center ">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/128/7939/7939869.png"
+                            style={{ width: "20px", height: "20px" }}
+                          ></img>
+                          <h5 className="mb-0" style={{ color: "#333333" }}>
+                            Download Invoice
+                          </h5>
+                        </div>
+
                         <img
-                          src="https://cdn-icons-png.flaticon.com/128/7939/7939869.png"
+                          src="https://sa-web-h1a.flixcart.com/mosaic/ss/RightChevron.svg?q=80"
                           style={{ width: "20px", height: "20px" }}
                         ></img>
-                        <h5 className="mb-0" style={{ color: "#333333" }}>
-                          Download Invoice
-                        </h5>
                       </div>
-
-                      <img
-                        src="https://sa-web-h1a.flixcart.com/mosaic/ss/RightChevron.svg?q=80"
-                        style={{ width: "20px", height: "20px" }}
-                      ></img>
-                    </div>
-                    ):(
+                    ) : (
                       <div
-                      className="rounded-3 shadow-sm bg-white p-3 px-4 d-flex justify-content-between "
-                     
-                      style={{ cursor: "pointer" , opacity:"0.5"  , cursor:"not-allowed"}}
-                    >
-                      <div className="d-flex gap-2  align-items-center ">
+                        className="rounded-3 shadow-sm bg-white p-3 px-4 d-flex justify-content-between "
+                        style={{
+                          cursor: "pointer",
+                          opacity: "0.5",
+                          cursor: "not-allowed",
+                        }}
+                      >
+                        <div className="d-flex gap-2  align-items-center ">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/128/7939/7939869.png"
+                            style={{ width: "20px", height: "20px" }}
+                          ></img>
+                          <h5 className="mb-0" style={{ color: "#333333" }}>
+                            Download Invoice
+                          </h5>
+                        </div>
+
                         <img
-                          src="https://cdn-icons-png.flaticon.com/128/7939/7939869.png"
+                          src="https://sa-web-h1a.flixcart.com/mosaic/ss/RightChevron.svg?q=80"
                           style={{ width: "20px", height: "20px" }}
                         ></img>
-                        <h5 className="mb-0" style={{ color: "#333333" }}>
-                          Download Invoice
-                        </h5>
                       </div>
-
-                      <img
-                        src="https://sa-web-h1a.flixcart.com/mosaic/ss/RightChevron.svg?q=80"
-                        style={{ width: "20px", height: "20px" }}
-                      ></img>
-                    </div>
                     )}
                   </div>
 
@@ -1126,8 +1189,6 @@ const handleAddToCartComboLocal = (e, v) => {
           </div>
         )}
       </div>
-
-      
 
       <Footer />
     </div>

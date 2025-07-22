@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import Navbar from "../../Components/Navbar";
+import Navbar from "../../../Components/Navbar";
 import { useState, useEffect, useContext } from "react";
-import { getComboProductDetails } from "../../services/product.service";
+import { getComboProductDetails } from "../../../services/product.service";
 import { useParams } from "next/navigation";
-import { LoggedDataContext } from "../../context/Context";
+import { LoggedDataContext } from "../../../context/Context";
 import { useRouter } from "next/navigation";
-import Footer from "../../Components/Footer";
+import Footer from "../../../Components/Footer";
 import { addReviewServ } from "@/app/services/product.service";
 import { toast } from "react-toastify";
 import FooterNav from "@/app/Components/FooterNav";

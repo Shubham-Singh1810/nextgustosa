@@ -213,7 +213,7 @@ const page = () => {
 
                           <div className="">
                             <h6 style={{ color: "rgb(72 72 72)" }}>
-                              Items: {order.product.length}
+                              Items: {order.product.length + order.comboProduct.product.length}
                             </h6>
                           </div>
 

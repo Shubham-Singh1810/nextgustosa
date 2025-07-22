@@ -94,11 +94,20 @@ function ComboProductCard({ value, showEdge }) {
     setComboCartList(localComboCartList);
   };
 
+     const slugify = (text) => {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")   
+    .replace(/[^\w\-]+/g, "")  
+    .replace(/\-\-+/g, "-"); 
+};
+
   return (
     <div
       className="productCard bg-light  shadow pt-3"
       style={{ borderRadius: "12px" }}
-      onClick={() => router.push("/combo-details/" + value?._id)}
+       onClick={() =>  router.push("/combo-details/" + slugify(value?.name) + "/" + value?._id)}
     >
       {showEdge && (
         <div className="d-flex justify-content-center">
