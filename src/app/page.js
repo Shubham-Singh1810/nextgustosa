@@ -51,10 +51,27 @@ export default function Home() {
     getCategoryList();
     getComboProductList();
   }, []);
+  const [category, setCategory] = useState("Home");
+
+  useEffect(() => {
+    const updateCategory = () => {
+      setCategory(window.innerWidth < 500 ? "HomeMobile" : "Home");
+    };
+
+    // Set category on load
+    updateCategory();
+
+    // Optional: update on window resize
+    window.addEventListener("resize", updateCategory);
+    return () => window.removeEventListener("resize", updateCategory);
+  }, []);
+
+  
+
   return (
     <>
       <Navbar selectedItem="Home" />
-      <HeroSection category="Home" />
+      <HeroSection category={category} />
       {/* <InfoContainer /> */}
       <ProductSlider
         title="Most Popular"

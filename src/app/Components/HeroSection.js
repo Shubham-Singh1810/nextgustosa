@@ -49,11 +49,22 @@ const HeroSection = ({category}) => {
             }).map((slide, index) => (
               <SwiperSlide key={index}>
                 <div className="hero-section d-flex flex-column justify-content-center">
-                  <img
-                    className="banner-img"
-                    src={slide.image}
-                    alt={`slide-${index}`}
-                  />
+                   {slide.mediaType === "video" ? (
+                      <video
+                        className="banner-img"
+                        src={slide.image}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                      />
+                    ) : (
+                      <img
+                        className="banner-img"
+                        src={slide.image}
+                        alt={`slide-${index}`}
+                      />
+                    )}
                 </div>
               </SwiperSlide>
             ))}

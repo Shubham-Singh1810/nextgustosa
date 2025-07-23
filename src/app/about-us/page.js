@@ -75,10 +75,24 @@ const page = () => {
 
     fetchBanners();
   }, []);
+    const [category, setCategory] = useState("About");
+
+  useEffect(() => {
+    const updateCategory = () => {
+      setCategory(window.innerWidth < 500 ? "AboutMobile" : "About");
+    };
+
+    // Set category on load
+    updateCategory();
+
+    // Optional: update on window resize
+    window.addEventListener("resize", updateCategory);
+    return () => window.removeEventListener("resize", updateCategory);
+  }, []);
   return (
     <>
       <Navbar selectedItem="About" />
-      <HeroSection category="About" />
+      <HeroSection category={category} />
       <div className="container aboutMain">
         <div className="row my-md-5 my-4 mx-0 mx-md-2">
           <div className="col-md-6 mt-auto col-12 px-0 px-md-2 ">
