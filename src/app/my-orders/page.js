@@ -118,23 +118,23 @@ const page = () => {
       </div>
                       );
                     })
-                  : orders.map((order) => {
+                  : orders?.map((order) => {
                       return (
                         <div
-                          key={order.id}
+                          key={order?.id}
                           className="row py-3 border-bottom "
                           style={{ minWidth: "600px" }}
                         >
                           <div className="d-flex gap-3 col-2">
                             <p style={{ color: "#797979" }}>
-                              {order._id.slice(0, 5)}
+                              {order?._id.slice(0, 5)}
                             </p>
                           </div>
 
                           <div className="col-2">
                             <h6 style={{ color: "#797979" }}>
                               {format(
-                                new Date(order.createdAt),
+                                new Date(order?.createdAt),
                                 "dd MMMM yyyy"
                               )}
                             </h6>
@@ -142,7 +142,7 @@ const page = () => {
 
                           <div className="col-2">
                             <h6 style={{ color: "#797979" }}>
-                              Items: {(order.product.length) + (order.comboProduct.length)+(order.variantProduct.length)}
+                              Items: {(order?.product?.length) + (order?.comboProduct?.length)+(order?.variantProduct?.length)}
                             </h6>
                           </div>
 
@@ -161,7 +161,7 @@ const page = () => {
 
                           <div className="col-2">
                             <h6 className="text-success text-capitalize">
-                              {order.status}
+                              {order?.status}
                             </h6>
                           </div>
 
@@ -189,15 +189,15 @@ const page = () => {
               <div className="d-block d-md-none">
                 <div className="row">
                   <div className="col-12">
-                    {orders.map((order) => {
+                    {orders?.map((order) => {
                       return (
                         <div
-                          key={order.id}
+                          key={order?.id}
                           className="border shadow-sm p-3 mb-3"
                         >
                           <div className="d-flex gap-3 ">
                             <p style={{ color: "rgb(72 72 72)" }}>
-                              Order Id: {order._id.slice(0, 5)}
+                              Order Id: {order?._id.slice(0, 5)}
                             </p>
                           </div>
 
@@ -205,7 +205,7 @@ const page = () => {
                             <h6 style={{ color: "rgb(72 72 72)" }}>
                               Date:{" "}
                               {format(
-                                new Date(order.createdAt),
+                                new Date(order?.createdAt),
                                 "dd MMMM yyyy"
                               )}
                             </h6>
@@ -213,7 +213,7 @@ const page = () => {
 
                           <div className="">
                             <h6 style={{ color: "rgb(72 72 72)" }}>
-                              Items: {order.product.length + order.comboProduct.product.length}
+                              Items: {order?.product?.length + order?.comboProduct?.product?.length}
                             </h6>
                           </div>
 
@@ -229,13 +229,13 @@ const page = () => {
                               style={{ color: "rgb(72 72 72)" }}
                             >
                               {" "}
-                              ₹{order.totalAmount}
+                              ₹{order?.totalAmount}
                             </p>
                           </div>
 
                           <div className="d-flex justify-content-between">
                             <h6 className="text-success text-capitalize">
-                              {order.status}
+                              {order?.status}
                             </h6>
 
                             <btn

@@ -222,7 +222,7 @@ const totalProducts =
       currency: "INR",
        name: "Gustosa Foods",
       description: "Purchase Transaction",
-      image: "/assets/logo.png",
+      image: "/assets/favicon.png",
       
       handler: function (response) {
         console.log(response);
