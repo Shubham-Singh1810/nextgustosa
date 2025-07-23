@@ -274,7 +274,7 @@ function ProductCard({ value, bgColor, borderRadius, innerHeight, height }) {
         ...(borderRadius && { borderRadius: borderRadius }),
         cursor:"pointer"
       }}
-      onClick={() =>  router.push("/product-details/" + slugify(value?.name) + "/" + value?._id)}
+      onClick={() =>  router.push("/product/" + slugify(value?.name) + "/" + value?._id)}
     >
       {/* <div className="d-flex justify-content-between align-items-center heartIcon pe-2  position-absolute " style={{zIndex:"99"}} >
        <h6 className="badge  text-white  bgPrimary p-sm-2 ">
