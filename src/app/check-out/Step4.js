@@ -202,11 +202,9 @@ const totalProducts =
 
   const[nextMessage , setNextMessage] = useState("Please place your order first.")
   const [messageShow , setMessageShow] = useState(false);
-
    const handleNext = () => {
      setMessageShow(true); 
   }
-
   const initiatePayment = () => {
     const amount = (cartList?.reduce(
       (total, item) => total + item.discountedPrice * item.quantity, 0 )
@@ -215,24 +213,17 @@ const totalProducts =
     ) +(varientList?.reduce(
       (total, item) => total + item.variantDiscountedPrice * item.quantity,0)
     )+ deliveryCharge
-
     const options = {
-      key: "rzp_test_fT349CvRXH2mv0",
+      key: "rzp_live_rEMXQOlJwmzWOn",
       amount: amount * 100, 
       currency: "INR",
        name: "Gustosa Foods",
       description: "Purchase Transaction",
       image: "/assets/favicon.png",
-      
       handler: function (response) {
         console.log(response);
-        // alert(
-        //   "Payment Successful! Payment ID: " + response.razorpay_payment_id
-        // );
         placeOrderFunc();
-        
       },
-
       prefill: {
         name: loggedUserData?.name || "Guest User",
         email: loggedUserData?.email || "guest@example.com",
@@ -242,7 +233,6 @@ const totalProducts =
        color: "#3D9970",
       },
     };
-
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };
